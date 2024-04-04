@@ -3,18 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    systems.url = "github:nix-systems/default-linux";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs }: {
-
-    templates = {
-      trivial = {
-        path = ./trivial;
-        description = "A very basic flake";
+  outputs = inputs@{ self, nixpkgs, flake-parts, systems }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = import systems;
+      flake = {
+        templates = {
+          trivial = {
+            path = ./trivial;
+            description = "A very basic flake";
+          };
+        };
+      };
+      perSystem = { pkgs, ... }: {
+        formatter = pkgs.nixfmt-rfc-style;
+        devShells = {
+          # Development shell environment for this flake depot.
+        };
       };
     };
-    devShell = {
-      # Development shell environment for this flake depot.
-    };
-  };
 }
