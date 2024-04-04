@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "demo-py-poetry-nix"
+version = "0.1.0"
+description = ""
+authors = ["Ben <ben@ya.ng>"]
+readme = "README.md"
+packages = [{include = "demo_py_poetry_nix"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cowsay = "^6.1"
+numpy = "^1.26.4"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "0.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

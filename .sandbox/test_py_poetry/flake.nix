@@ -23,6 +23,8 @@
             ...
           }:
           let
+            # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
+            # pkgs = nixpkgs.legacyPackages.${system};
             inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication mkPoetryEnv;
           in
           {
@@ -35,10 +37,10 @@
             devShells.default = pkgs.mkShell {
               # inputsFrom = [ self'.packages.myapp ];
               buildInputs = [
-                mkPoetryEnv {
+                (mkPoetryEnv {
                   projectDir = ./.;
                   preferWheels = true;
-                }
+                })
               ];
               packages = [ pkgs.poetry ];
             };
