@@ -7,7 +7,13 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, systems }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      flake-parts,
+      systems,
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import systems;
       flake = {
@@ -16,13 +22,23 @@
             path = ./trivial;
             description = "A very basic flake";
           };
+          py-poetry = {
+            path = ./python/poetry;
+            description = "A python project managed by Poetry.";
+          };
         };
       };
-      perSystem = { pkgs, ... }: {
-        formatter = pkgs.nixfmt-rfc-style;
-        devShells = {
-          # Development shell environment for this flake depot.
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt-rfc-style;
+          devShells.default = pkgs.mkShell {
+            # Development shell environment for this flake depot.
+            packages = [pkgs.nushellFull pkgs.hello];
+            # shellHook = ''
+            #   nu
+            # '';
+          };
         };
-      };
     };
 }
