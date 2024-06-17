@@ -26,6 +26,10 @@
             path = ./python/poetry;
             description = "A python project managed by Poetry.";
           };
+          empty = {
+            path = ./empty;
+            description = "An empty flake, useful for non-derivation flakes.";
+          };
         };
       };
       perSystem =
