@@ -19,15 +19,15 @@
       flake = {
         templates = {
           trivial = {
-            path = ./trivial;
+            path = ./templates/trivial;
             description = "A very basic flake";
           };
           py-poetry = {
-            path = ./python/poetry;
+            path = ./templates/python/poetry;
             description = "A python project managed by Poetry.";
           };
           empty = {
-            path = ./empty;
+            path = ./templates/empty;
             description = "An empty flake, useful for non-derivation flakes.";
           };
         };
