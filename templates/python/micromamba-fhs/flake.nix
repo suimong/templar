@@ -14,8 +14,8 @@
       let
         metadata = import ./metadata.nix;
         mamba = rec {
-          root_prefix = builtins.toString ./.repo/.mamba;
-          rcfile = builtins.toString ./.repo/.mambarc;
+          root_prefix = ".repo/.mamba";
+          rcfile = ".repo/.mambarc";
           getPrefix = {name, root ? root_prefix}: "${root}/envs/${name}";
           env = rec {
             name = metadata.mamba_env_name;
