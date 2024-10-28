@@ -12,7 +12,7 @@
     systems = import systems;
     perSystem = {config, self', inputs', pkgs, system, ... }:
       let
-        metadata = import ./project_metadata.nix;
+        metadata = import ./metadata.nix;
         mamba = rec {
           root_prefix = builtins.toString ./.repo/.mamba;
           rcfile = builtins.toString ./.repo/.mambarc;
@@ -29,7 +29,7 @@
             pkgs.micromamba
             pkgs.nushell
           ];
-          runScript = "exec nu";
+          runScript = "nu";
           # ref: https://github.com/ereduled/kickstart-python/blob/6ca6244e030bed39c9f99408037336297f73a81c/kickstart-python/flake.nix
           profile = ''
           set -e
@@ -43,10 +43,10 @@
             
             echo "Creating micromamba environment: ${mamba.env.name}";
             micromamba create --yes -n ${mamba.env.name}
-          else
             eval "$(micromamba shell hook --shell=posix)"
           fi
           
+          eval "$(micromamba shell hook --shell=posix)"
           micromamba activate ${mamba.env.name}
           set +e
           '';
