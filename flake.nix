@@ -31,7 +31,7 @@
             description = "Micromamba enabled through BuildFHSEnv";
             welcomeText = ''
               # ${(import (path + "/flake.nix")).description}
-              Please edit the `metadata.nix` before running `nix develop`.
+              Please edit the `metadata.nix` file before running `nix develop`.
             '';
           };
           empty = {

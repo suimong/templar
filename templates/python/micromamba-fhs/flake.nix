@@ -30,7 +30,6 @@
             pkgs.nushell
           ];
           runScript = "nu";
-          # ref: https://github.com/ereduled/kickstart-python/blob/6ca6244e030bed39c9f99408037336297f73a81c/kickstart-python/flake.nix
           profile = ''
           set -e
 
