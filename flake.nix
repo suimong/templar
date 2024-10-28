@@ -42,6 +42,16 @@
               Please edit the `pyproject.toml` file before running `nix develop`.
             '';
           };
+          uv = rec {
+            path = ./templates/python/uv;
+            description = (import (path + "/flake.nix")).description;
+            welcomeText = ''
+              # ${description}
+              Please edit the `pyproject.toml` file before running `nix develop`.
+              
+              Please run `nix develop --impure` instead of `nix develop`.
+            '';
+          };
           empty = {
             path = ./templates/empty;
             description = "An empty flake, useful for non-derivation flakes.";
