@@ -36,9 +36,9 @@
           };
           pixi = rec {
             path = ./templates/python/pixi;
-            description = "Pixi based Python development environment.";
+            description = (import (path + "/flake.nix")).description;
             welcomeText = ''
-              # ${(import (path + "/flake.nix")).description}
+              # ${description}
               Please edit the `pyproject.toml` file before running `nix develop`.
             '';
           };

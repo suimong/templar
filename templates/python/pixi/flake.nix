@@ -1,5 +1,5 @@
 {
-  description = "Micromamba ready development shell enabled by BuildFSHEnv.";
+  description = "Pixi based Python development environment.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -15,7 +15,7 @@
         project = rec {
           src = builtins.fromTOML (builtins.readFile ./pyproject.toml);
           name = src.project.name;
-
+          pixi_sourcing_script_rel_path = ".repo/.cache/pixi_sourcing.nu";
         };
       in
       {
@@ -28,9 +28,14 @@
               pkgs.bashInteractive
             ];
             shellHook = ''
-              source_script="$PWD/.repo/.cache/pixi_sourcing.nu"
+              source_script="$PWD/${project.pixi_sourcing_script_rel_path}"
+
+              echo "Initializing pixi environment..."
               pixi shell-hook --shell nushell > $source_script
-              nu --execute "source .repo/.cache/pixi_sourcing.nu"
+
+              mv gitignore .gitignore
+              mv gitattributes .gitattributes
+              exec nu --execute "source ${project.pixi_sourcing_script_rel_path}"
             '';
           };
         };
