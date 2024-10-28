@@ -34,6 +34,14 @@
               Please edit the `metadata.nix` file before running `nix develop`.
             '';
           };
+          pixi = rec {
+            path = ./templates/python/pixi;
+            description = "Pixi based Python development environment.";
+            welcomeText = ''
+              # ${(import (path + "/flake.nix")).description}
+              Please edit the `pyproject.toml` file before running `nix develop`.
+            '';
+          };
           empty = {
             path = ./templates/empty;
             description = "An empty flake, useful for non-derivation flakes.";
