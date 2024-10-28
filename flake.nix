@@ -26,6 +26,14 @@
             path = ./templates/python/poetry;
             description = "A python project managed by Poetry.";
           };
+          micromamba-fhs = rec {
+            path = ./templates/python/micromamba-fhs;
+            description = "Micromamba enabled through BuildFHSEnv";
+            welcomeText = ''
+              # ${(import (path + "/flake.nix")).description}
+              Please edit the `metadata.nix` before running `nix develop`.
+            '';
+          };
           empty = {
             path = ./templates/empty;
             description = "An empty flake, useful for non-derivation flakes.";
