@@ -27,11 +27,15 @@
           util-linux
           xz
         ]);
+        project = rec {
+          src = builtins.fromTOML (builtins.readFile ./pyproject.toml);
+          name = src.project.name;
+        };
       in
       {
         devShells = {
           default = pkgs.mkShellNoCC {
-            name = "kew-o32-trader";
+            name = project.name;
             packages = [
               pkgs.python3
               pkgs.uv
